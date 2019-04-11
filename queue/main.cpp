@@ -118,25 +118,27 @@ int main()
         k_time += 10;
         h_time += 10;
         space = 10;
-        if(!k.isEmpty()) k_total += 10;
-        if(!h.isEmpty()) h_total += 10;
         for (int i = 0;i < 8; ++i){
             if ((!k.isEmpty()) && (k.getHead() < k_time)){
                 k_time -= k.deQueue();
+                k_total += k_time;
                 space--;
             }
         }
         while((space > 0) && (!h.isEmpty()) && (h_time - h.getHead() >= 0)){
             h_time -= h.deQueue();
+            h_total += h_time;
             space--;
         }
 
         while((space > 0) && (!k.isEmpty()) && (k_time - k.getHead() >= 0)){
             k_time -= k.deQueue();
+            k_total += k_time;
             space--;
         }
     }
-    cout << "客车的平均等待时间是：" << (k_total / k_num) << endl;
-    cout << "货车的平均等待时间是：" << (h_total / h_num) << endl;
+
+    cout << "客车的平均等待时间是：" << (double)((double)k_total / (double)k_num) << endl;
+    cout << "货车的平均等待时间是：" << (double)((double)h_total / (double)h_num) << endl;
     return 0;
 }
