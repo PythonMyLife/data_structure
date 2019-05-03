@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1556874121 source:d:\school\data structure\git\tree\main.cpp
+	"linkQueue.h"
+
+1556869691 d:\school\data structure\git\tree\linkqueue.h
+	<iostream>
+
