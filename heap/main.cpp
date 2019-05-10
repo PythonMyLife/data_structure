@@ -23,6 +23,7 @@ public:
     Type getHead() const;
     int findMin(int x);
     int findMinImpl(int x, int i);
+    void decreaseKey(int i, int value);
     void show();
 };
 
@@ -147,18 +148,25 @@ int priorityQueue<Type>::findMin(int x)
 template<class Type>
 int priorityQueue<Type>::findMinImpl(int x, int i)
 {
-    if(array[i] > x){
-        cout << "get_one:" << array[i] <<endl;
-        return array[i];
-    }
+    if(array[i] > x) return array[i];
     if(2 * i > currentSize) return -1;
     if(2 * i == currentSize) return findMinImpl(x, 2*i);
     int tmp1,tmp2;
     tmp1 = findMinImpl(x, 2*i);
     tmp2 = findMinImpl(x, 2*i+1);
-    if(tmp1 == -1 && tmp2 != -1) return tmp2;
-    if(tmp2 == -1 && tmp1 != -1) return tmp1;
+    if(tmp1 == -1) return tmp2;
+    if(tmp2 == -1) return tmp1;
     return (tmp1 > tmp2)?tmp2:tmp1;
+}
+
+template<class Type>
+void priorityQueue<Type>::decreaseKey(int i, int value)
+{
+    int j,finally = array[i] - value;
+    for(j = i; j >= 1 && finally < array[j]; j /= 2){
+        array[j] = array[j/2];
+    }
+    array[j] = finally;
 }
 
 
@@ -171,5 +179,7 @@ int main()
     a.show();
     cout << '\n' << "find min 9:";
     cout << a.findMin(9)<< endl;
+    a.decreaseKey(4,7);
+    a.show();
     return 0;
 }
