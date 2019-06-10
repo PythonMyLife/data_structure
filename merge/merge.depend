@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1560151435 source:d:\school\data structure\git\merge\main.cpp
+	<iostream>
+	<fstream>
+
